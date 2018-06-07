@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+   <h:body>
+       <ui:composition template="./templatePaciente.xhtml">
+           <ui:define name="content">
+               <div class="col-lg-12 text-center">
+                        <h1>Consultas Agendadas</h1>
+               </div>
+               <h:form>
+                   <p:dataTable id="dataTableConsultaPaciente" 
+                                var="paciente" 
+                                value="#{listaConsultaPaciente.paciente}" 
+                                widgetVar="consultaPacienteTable"
+                                emptyMessage="Nenhuma consulta encontrada"
+                                rows="5"
+                                paginator="true"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="5,10,15">
+                       <p:column headerText="Medico" >
+                           <h:outputText value="#{medico.nome}" />
+                       </p:column>
+
+                       <p:column headerText="Especialidade" >
+                           <h:outputText value="#{medico.especialidade}" />
+                       </p:column>
+					   
+					   <p:column headerText="Data" >
+                           <h:outputText value="#{consulta.data}" />
+                       </p:column>
+                   </p:dataTable>
+               </h:form>
+           </ui:define>     
+       </ui:composition>
+   </h:body>
+</html>
