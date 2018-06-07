@@ -27,6 +27,9 @@ public class LoginMedico implements Serializable {
     @Inject
     MedicoDAO medicoDAO;
     
+    @Inject
+    SessaoAtiva sessaoAtiva;
+    
     private String crm;
     Medico medicoEncontrado;
     
@@ -90,18 +93,20 @@ public class LoginMedico implements Serializable {
             mensagem.setMensagem(true, "Ocorreu um problema!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
         }
     }
-
     
-    public void conferirSenha() {
-        simularDemora();
+    public String acesso() {
         String senhatemp = (String) this.getSenha().getValue();
-        if (senhatemp.equals(medicoEncontrado.getSenha())) {
-            mensagem.setMensagem(true, "Senha correta!", MensagemBootstrap.TipoMensagem.TIPO_SUCESSO);
-        } else {
-            mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
-        }       
+        if (medicoEncontrado != null){
+            if (senhatemp.equals(medicoEncontrado.getSenha())) {
+                sessaoAtiva.setMedicoLogado(medicoEncontrado);
+                return "areaMedico";
+            } else {
+                mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
+                return "loginMedico";
+            }     
+        }
+        return "loginMedico";
     }
-
     
     private void simularDemora() {
         // Para testar chamadas AJAX
