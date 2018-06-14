@@ -43,14 +43,14 @@
                                            <f:ajax execute="senha"
                                                     render="@form"
                                                     onevent="monitorarAjax"
-                                                    listener="#{loginAdmin.conferirSenha}"/>
+                                                    listener="#{loginAdmin.acesso}"/>
                                     </input>
                                     <h:message for="senha" class="text text-danger" />
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-12">
-                                    <button class="btn btn-default" jsf:outcome="areaAdmin">Entrar</button>
+                                    <h:commandButton class="btn btn-default" action="#{loginAdmin.acesso()}">Entrar</h:commandButton>
                                 </div>
                             </div>
                         </form> 

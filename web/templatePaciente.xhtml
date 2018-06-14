@@ -48,7 +48,7 @@ and open the template in the editor.
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="#{view.viewId=='/listaMedico.xhtml'?'active':''}"><a jsf:outcome="listaConsultaPaciente">Visualizar Consultas</a></li>
                                 <li class="#{view.viewId=='/areaPaciente.xhtml'?'active':''}"><a jsf:outcome="addConsulta">Solicitar Consulta</a></li>
-				<li class="#{view.viewId=='/areaPaciente.xhtml'?'active':''}"><a action="#{SessaoAtiva.deslogar()}">Sair</a></li>
+				<li class="#{view.viewId=='/areaPaciente.xhtml'?'active':''}"><a jsf:outcome="#{SessaoAtiva.deslogar()}">Sair</a></li>
                             </ul>
                         </div>
                     </div>

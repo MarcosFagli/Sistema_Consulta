@@ -90,17 +90,6 @@ public class LoginPaciente implements Serializable {
         }
     }
 
-    
-    public void conferirSenha() {
-        simularDemora();
-        String senhatemp = (String) this.getSenha().getValue();
-        if (senhatemp.equals(pacienteEncontrado.getSenha())) {
-            mensagem.setMensagem(true, "Senha correta!", MensagemBootstrap.TipoMensagem.TIPO_SUCESSO);
-        } else {
-            mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
-        }       
-    }
-
     public String acesso() {
         String senhatemp = (String) this.getSenha().getValue();
         if (pacienteEncontrado != null){
@@ -113,8 +102,7 @@ public class LoginPaciente implements Serializable {
             }     
         }   
         System.out.println("PASOOOUUU4");
-        return "loginPaciente";
-        
+        return "loginPaciente";   
     }
     
     private void simularDemora() {

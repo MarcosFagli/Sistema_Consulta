@@ -65,21 +65,25 @@ public class LoginAdmin implements Serializable {
         if (email.equals("admin@ufscar.br")){
             mensagem.setMensagem(true, "Admin encontrado, digite a senha!", MensagemBootstrap.TipoMensagem.TIPO_SUCESSO);
         } else {
-            mensagem.setMensagem(true, "Admin errado!", MensagemBootstrap.TipoMensagem.TIPO_INFO);
+            mensagem.setMensagem(true, "Admin não encontrado!", MensagemBootstrap.TipoMensagem.TIPO_INFO);
         }
     }
 
-    
-    public void conferirSenha() {
-        simularDemora();
+    public String acesso() {
         String senhatemp = (String) this.getSenha().getValue();
-        if (senhatemp.equals("1234")) {
-            mensagem.setMensagem(true, "Senha correta!", MensagemBootstrap.TipoMensagem.TIPO_SUCESSO);
-        } else {
-            mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
-        }       
+        if (email != null){
+            if (senhatemp.equals("1234")) {
+                //sessaoAtiva.setAdmin();
+                return "areaAdmin";
+            } else {
+                mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
+                return "loginAdmin";
+            }     
+        }   
+        System.out.println("PASOOOUUU4");
+        return "loginAdmin";   
     }
-
+    
     
     private void simularDemora() {
         // Para testar chamadas AJAX
