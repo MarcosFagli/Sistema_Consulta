@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Mateus Pafume
+ * @author Marcos
  */
 public class MensagemBootstrap implements Serializable {
     public enum TipoMensagem {

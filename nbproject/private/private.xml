@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Mateus%20Pafume/Desktop/PROJETO/Consulta/web/loginPaciente.xhtml</file>
-            <file>file:/C:/Users/Mateus%20Pafume/Desktop/PROJETO/Consulta/src/java/br/ufscar/dc/consulta/views/SessaoAtiva.java</file>
-            <file>file:/C:/Users/Mateus%20Pafume/Desktop/PROJETO/Consulta/src/java/br/ufscar/dc/consulta/views/AddPaciente.java</file>
-            <file>file:/C:/Users/Mateus%20Pafume/Desktop/PROJETO/Consulta/src/java/br/ufscar/dc/consulta/views/AddMedico.java</file>
+            <file>file:/home/marcos/Documents/UFSCar/Grad/Desenvolvimento_de_Software_para_WEB/PROJETO/Sistema_Consulta-master/web/loginPaciente.xhtml</file>
+            <file>file:/home/marcos/Documents/UFSCar/Grad/Desenvolvimento_de_Software_para_WEB/PROJETO/Sistema_Consulta-master/web/loginAdmin.xhtml</file>
+            <file>file:/home/marcos/Documents/UFSCar/Grad/Desenvolvimento_de_Software_para_WEB/PROJETO/Sistema_Consulta-master/src/java/br/ufscar/dc/consulta/views/LoginPaciente.java</file>
+            <file>file:/home/marcos/Documents/UFSCar/Grad/Desenvolvimento_de_Software_para_WEB/PROJETO/Sistema_Consulta-master/src/java/br/ufscar/dc/consulta/views/LoginAdmin.java</file>
         </group>
     </open-files>
 </project-private>

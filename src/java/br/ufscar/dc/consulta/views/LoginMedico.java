@@ -92,16 +92,20 @@ public class LoginMedico implements Serializable {
     }
 
     
-    public void conferirSenha() {
-        simularDemora();
-        String senhatemp = (String) this.getSenha().getValue();
-        if (senhatemp.equals(medicoEncontrado.getSenha())) {
-            mensagem.setMensagem(true, "Senha correta!", MensagemBootstrap.TipoMensagem.TIPO_SUCESSO);
+    public String acesso() {
+        if(medicoEncontrado != null){
+            simularDemora();
+            String senhatemp = (String) this.getSenha().getValue();
+            if (senhatemp.equals(medicoEncontrado.getSenha())) {
+                return "areaMedico";
+            } else {
+                mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
+                return "loginMedico";
+            }
         } else {
-            mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
-        }       
+            return "loginMedico";
+        }
     }
-
     
     private void simularDemora() {
         // Para testar chamadas AJAX

@@ -40,10 +40,6 @@
                                            jsf:redisplay="true"
                                            jsf:binding="#{loginAdmin.senha}"
                                            jsf:required="true">
-                                           <f:ajax execute="senha"
-                                                    render="@form"
-                                                    onevent="monitorarAjax"
-                                                    listener="#{loginAdmin.acesso}"/>
                                     </input>
                                     <h:message for="senha" class="text text-danger" />
                                 </div>
