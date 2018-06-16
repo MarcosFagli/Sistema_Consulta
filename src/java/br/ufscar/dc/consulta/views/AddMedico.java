@@ -37,6 +37,16 @@ public class AddMedico implements Serializable {
 
     UIInput senhaInput;
     
+    private boolean liberado = false;
+
+    public boolean isLiberado() {
+        return liberado;
+    }
+
+    public void setLiberado(boolean liberado) {
+        this.liberado = liberado;
+    }
+    
     public UIInput getSenhaInput() {
         return senhaInput;
     }
@@ -77,9 +87,20 @@ public class AddMedico implements Serializable {
             ((UIInput) toValidate).setValid(false);
             FacesMessage message = new FacesMessage("Senha não confere!");
             context.addMessage(toValidate.getClientId(context), message);
+            setLiberado(false);
+            
         } else {
             medico.setSenha(senha1);
+            setLiberado(true);
         }
+    }
+    
+    public String adicionar(){
+        if(isLiberado()){
+            cadastrarMedico();
+            return "areaAdmin";
+        }
+        return "addMedico";
     }
     
     public void setMedico(Medico medico) {
