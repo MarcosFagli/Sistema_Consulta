@@ -41,27 +41,28 @@ public class AddPaciente implements Serializable {
         return senhaInput;
     }
 
-
     public void setSenhaInput(UIInput senhaInput) {
         this.senhaInput = senhaInput;
     }
     
     public AddPaciente(){
-    paciente = new Paciente();
-    
-    mensagem = new MensagemBootstrap();
-
-    mensagem.setMensagem(true, "Preencha os dados dos Médicos", MensagemBootstrap.TipoMensagem.TIPO_INFO);
-
-    
+        paciente = new Paciente();
+        mensagem = new MensagemBootstrap();
+        mensagem.setMensagem(true, "Preencha os dados do Paciente", MensagemBootstrap.TipoMensagem.TIPO_INFO);
     }
     
     @PostConstruct
     public void cadastrarPaciente() {
-        try {
-            pacienteDAO.gravarPaciente(paciente);
-        } catch (SQLException ex) {
-            Logger.getLogger(ListaMedicos.class.getName()).log(Level.SEVERE, null, ex);
+        System.out.println("nome1");
+        System.out.println(paciente.getNome());
+        if(paciente.getNome() != null){
+            
+            try {
+                System.out.println("senha");
+                pacienteDAO.gravarPaciente(paciente);
+            } catch (SQLException ex) {
+                Logger.getLogger(ListaMedicos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -69,17 +70,19 @@ public class AddPaciente implements Serializable {
         return paciente;
     }
 
-    public void validarConfirmacaoDeSenha(FacesContext context,
-            UIComponent toValidate,
-            String value) {
-        String senha1 = (String) senhaInput.getValue();
-        if (!value.equals(senha1)) {
-            ((UIInput) toValidate).setValid(false);
-            FacesMessage message = new FacesMessage("Senha não confere!");
-            context.addMessage(toValidate.getClientId(context), message);
-        }
-        else{
-            paciente.setSenha(senha1);
+    public void validarConfirmacaoDeSenha(FacesContext context, UIComponent toValidate, String value) {
+        if(paciente.getNome() != null){
+            System.out.println("Csenha");
+            String senha1 = (String) senhaInput.getValue();
+            System.out.println("Psenha");
+            if (!value.equals(senha1)) {
+                ((UIInput) toValidate).setValid(false);
+                FacesMessage message = new FacesMessage("Senha não confere!");
+                context.addMessage(toValidate.getClientId(context), message);
+            }
+            else{
+                paciente.setSenha(senha1);
+            }
         }
     }
     

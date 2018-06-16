@@ -38,20 +38,25 @@ public class PacienteDAO {
    DataSource dataSource;
 
    public Paciente gravarPaciente(Paciente p) throws SQLException {
-       try (Connection con = dataSource.getConnection();
-               PreparedStatement ps = con.prepareStatement(CRIAR_PACIENTE_SQL, Statement.RETURN_GENERATED_KEYS);) {
-           ps.setString(1, p.getNome());
-           ps.setString(2, p.getSenha());
-           ps.setString(3, p.getCpf());
-           ps.setString(4, p.getTelefone());
-           ps.setString(5, p.getSexo());
-           ps.setDate(6, new java.sql.Date(p.getDataDeNascimento().getTime()));
-           ps.execute();
+       if(p.getNome() != null){
+            System.out.println("Passou1");
+            try (Connection con = dataSource.getConnection();
+                    PreparedStatement ps = con.prepareStatement(CRIAR_PACIENTE_SQL, Statement.RETURN_GENERATED_KEYS);) {
+                ps.setString(1, p.getNome());
+                ps.setString(2, p.getSenha());
+                ps.setString(3, p.getCpf());
+                ps.setString(4, p.getTelefone());
+                ps.setString(5, p.getSexo());
+                ps.setDate(6, new java.sql.Date(p.getDataDeNascimento().getTime()));
+                ps.execute();
+                System.out.println("Passou2");
 
-           try (ResultSet rs = ps.getGeneratedKeys()) {
-               rs.next();
-               p.setId(rs.getInt(1));
-           }
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    rs.next();
+                    p.setId(rs.getInt(1));
+                }
+            }
+            return p;
        }
        return p;
    }
