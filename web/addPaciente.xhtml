@@ -99,7 +99,8 @@ and open the template in the editor.
                                            jsf:id="confirmarSenha"
                                            jsf:label="ConfirmarSenha"
                                            jsf:redisplay="true"
-                                           jsf:validator="#{addPaciente.validarConfirmacaoDeSenha}"
+                                           jsf:binding="#//{addPaciente.senhacInput}"
+                                           jsf:validator="#//{addPaciente.validarConfirmacaoDeSenha}"
                                            jsf:required="true">
                                     </input>
                                     <h:message for="cSenha" class="text text-danger" />
@@ -107,7 +108,7 @@ and open the template in the editor.
                             </div>
                             <div>
                                 <div class="col-sm-12">
-                                    <h:commandButton class="btn btn-default" action="#{addPaciente.cadastrarPaciente()}">Adicionar novo Pacienter</h:commandButton>
+                                    <h:commandButton class="btn btn-default" action="#{addPaciente.adicionar()}">Adicionar novo Pacienter</h:commandButton>
                                 </div>
                             </div>
                         </form> 

@@ -36,6 +36,25 @@ public class AddPaciente implements Serializable {
     MensagemBootstrap mensagem;
 
     UIInput senhaInput;
+    UIInput senhacInput;
+    
+    private boolean liberado = false;
+
+    public UIInput getSenhacInput() {
+        return senhacInput;
+    }
+
+    public void setSenhacInput(UIInput senhacInput) {
+        this.senhacInput = senhacInput;
+    }
+    
+    public boolean isLiberado() {
+        return liberado;
+    }
+
+    public void setLiberado(boolean liberado) {
+        this.liberado = liberado;
+    }
     
     public UIInput getSenhaInput() {
         return senhaInput;
@@ -44,50 +63,67 @@ public class AddPaciente implements Serializable {
     public void setSenhaInput(UIInput senhaInput) {
         this.senhaInput = senhaInput;
     }
-    
-    public AddPaciente(){
-        paciente = new Paciente();
-        mensagem = new MensagemBootstrap();
-        mensagem.setMensagem(true, "Preencha os dados do Paciente", MensagemBootstrap.TipoMensagem.TIPO_INFO);
-    }
-    
-    @PostConstruct
-    public void cadastrarPaciente() {
-        System.out.println("nome1");
-        System.out.println(paciente.getNome());
-        if(paciente.getNome() != null){
-            
-            try {
-                System.out.println("senha");
-                pacienteDAO.gravarPaciente(paciente);
-            } catch (SQLException ex) {
-                Logger.getLogger(ListaMedicos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
 
     public Paciente getPaciente() {
         return paciente;
-    }
-
-    public void validarConfirmacaoDeSenha(FacesContext context, UIComponent toValidate, String value) {
-        if(paciente.getNome() != null){
-            System.out.println("Csenha");
-            String senha1 = (String) senhaInput.getValue();
-            System.out.println("Psenha");
-            if (!value.equals(senha1)) {
-                ((UIInput) toValidate).setValid(false);
-                FacesMessage message = new FacesMessage("Senha não confere!");
-                context.addMessage(toValidate.getClientId(context), message);
-            }
-            else{
-                paciente.setSenha(senha1);
-            }
-        }
     }
     
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
     
+    public AddPaciente(){
+        System.out.println("Aki paciente 1: ");
+        paciente = new Paciente();
+        mensagem = new MensagemBootstrap();
+        mensagem.setMensagem(true, "Preencha os dados do Paciente", MensagemBootstrap.TipoMensagem.TIPO_INFO);
+        System.out.println("Aki paciente 2: ");
+    }
+    
+    public void cadastrarPaciente() {
+        System.out.println("Aki cadastrar : nome");
+        try {
+            pacienteDAO.gravarPaciente(paciente);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaMedicos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void validarConfirmacaoDeSenha(FacesContext context, UIComponent toValidate, String value) {
+        System.out.println("Aki 1 : nome");
+        System.out.println(paciente.getNome());
+        if(paciente.getNome() != null){
+            System.out.println("Aki 2 : convertendo senha");
+            String senha1 = (String) senhaInput.getValue();
+            String senhac = (String) senhacInput.getValue();
+            System.out.println("Aki 3 : senha");
+            System.out.println(senha1);
+            System.out.println("Aki 4 : Aew mlq");
+            if (!senhac.equals(senha1)) {
+                System.out.println("Aki 5 : Hey, deu ruim");
+                FacesMessage message = new FacesMessage("Senha não confere!");
+                context.addMessage(toValidate.getClientId(context), message);
+                setLiberado(false);
+            }
+            else {
+                System.out.println("Aki 5 : Hey, deu bom");
+                paciente.setSenha(senha1);
+                setLiberado(true);  
+            }
+        }
+        System.out.println("Aki 6 : mas nem paciente tem");
+    }
+    
+    public String adicionar(){
+        System.out.println("Aki add 1 : liberado");
+        System.out.println(liberado);
+        System.out.println("Aki add 2 : vai para o if");
+        if(liberado){
+            System.out.println("Aki add 3: liberou");
+            cadastrarPaciente();
+            return "areaAdmin";
+        } else {
+            return "addPaciente";
+        }
+    }
 }

@@ -61,7 +61,6 @@ public class LoginAdmin implements Serializable {
     }
     
     public void logarAdmin() {
-        simularDemora();
         if (email.equals("admin@ufscar.br")){
             mensagem.setMensagem(true, "Admin encontrado, digite a senha!", MensagemBootstrap.TipoMensagem.TIPO_SUCESSO);
         } else {
