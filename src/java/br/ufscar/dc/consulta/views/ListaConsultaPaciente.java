@@ -30,6 +30,9 @@ public class ListaConsultaPaciente implements Serializable {
     @Inject
     ConsultaDAO consultaDAO;
 
+    @Inject
+    SessaoAtiva sessaoAtiva;
+    
     Paciente paciente;
 
     private List<Consulta> consulta;
@@ -40,7 +43,8 @@ public class ListaConsultaPaciente implements Serializable {
     @PostConstruct
     public void init() {
         try {
-            consulta = consultaDAO.listarTodasConsultas();
+            paciente = sessaoAtiva.getPacienteAtivo();
+            consulta = consultaDAO.listarTodasConsultasPaciente(paciente.getCpf());
         } catch (SQLException ex) {
             Logger.getLogger(ListaMedicos.class.getName()).log(Level.SEVERE, null, ex);
         }

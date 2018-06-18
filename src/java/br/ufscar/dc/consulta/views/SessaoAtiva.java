@@ -29,8 +29,6 @@ public class SessaoAtiva implements Serializable{
 
     public void setAdmin() {
         this.admin = true;
-        System.out.println("admin");
-        System.out.println(this.admin);
     }
     
     public void clearAdmin() {
@@ -40,15 +38,22 @@ public class SessaoAtiva implements Serializable{
     public void setMedicoLogado(Medico medico) {
         medicoAtivo = medico;
     }
+
+    public Medico getMedicoAtivo() {
+        return medicoAtivo;
+    }
     
     public void setPacienteLogado(Paciente paciente) {
         pacienteAtivo = paciente;
         System.out.println(pacienteAtivo.getNome());
     }
     
+    public Paciente getPacienteAtivo() {
+        return pacienteAtivo;
+    }
+    
     public String verificar(){
-        System.out.println("AEW GAROTO!");
-        if(pacienteAtivo == null){
+        if(pacienteAtivo == null && medicoAtivo == null && admin == false){
             return "index";
         } else {
             return null;
@@ -58,7 +63,7 @@ public class SessaoAtiva implements Serializable{
     public String deslogar(){
         medicoAtivo = null;
         pacienteAtivo = null;
-        System.out.println("AKIIIII");
+        admin = false;
         return "index";
     }
 }

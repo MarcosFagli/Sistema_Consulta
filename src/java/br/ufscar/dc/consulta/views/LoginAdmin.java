@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.component.UIInput;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -19,6 +20,9 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 public class LoginAdmin implements Serializable {
+    
+    @Inject
+    SessaoAtiva sessaoAtiva;
         
     private String email;
     
@@ -72,7 +76,7 @@ public class LoginAdmin implements Serializable {
         String senhatemp = (String) this.getSenha().getValue();
         if (email != null){
             if (senhatemp.equals("1234")) {
-                //sessaoAtiva.setAdmin();
+                sessaoAtiva.setAdmin();
                 return "areaAdmin";
             } else {
                 mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);

@@ -31,8 +31,10 @@
                        <p:column headerText="Medico" filterBy="#{medico.nome}" filterMatchMode="contains">
                            <h:outputText value="#{medico.nome}" />
                        </p:column>
-
-                       <p:column headerText="Especialidade" filterBy="#{medico.especialidade}" filterMatchMode="contains">
+                       <p:column headerText="CRM" filterBy="#{medico.crm}" filterMatchMode="contains">
+                           <h:outputText value="#{medico.crm}" />
+                       </p:column>
+                        <p:column headerText="Especialidade" filterBy="#{medico.especialidade}" filterMatchMode="contains">
                            <h:outputText value="#{medico.especialidade}" />
                        </p:column>
                    </p:dataTable>

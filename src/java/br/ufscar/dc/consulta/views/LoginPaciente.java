@@ -100,8 +100,7 @@ public class LoginPaciente implements Serializable {
                 mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
                 return "loginPaciente";
             }     
-        }   
-        System.out.println("PASOOOUUU4");
+        }
         return "loginPaciente";   
     }
     

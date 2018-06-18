@@ -27,6 +27,9 @@ public class LoginMedico implements Serializable {
     @Inject
     MedicoDAO medicoDAO;
     
+    @Inject
+    SessaoAtiva sessaoAtiva;
+    
     private String crm;
     Medico medicoEncontrado;
     
@@ -97,6 +100,7 @@ public class LoginMedico implements Serializable {
             simularDemora();
             String senhatemp = (String) this.getSenha().getValue();
             if (senhatemp.equals(medicoEncontrado.getSenha())) {
+                sessaoAtiva.setMedicoLogado(medicoEncontrado);
                 return "areaMedico";
             } else {
                 mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);

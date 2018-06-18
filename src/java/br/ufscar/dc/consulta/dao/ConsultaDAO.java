@@ -34,8 +34,13 @@ public class ConsultaDAO {
            + " from Consulta c";
     
     private final static String LISTAR_CONSULTA_MEDICO_SQL = "select"
-            + " c.cpf, c.crm, c.data"
+            + " c.cpf, c.crm, c.datadaconsulta"
             + " from Consulta c";
+    
+    private final static String LISTAR_CONSULTA_PACIENTE_SQL = "select"
+            + " c.cpf, c.crm, c.datadaconsulta"
+            + " from Consulta c";
+    
     
     @Resource(name = "jdbc/ConsultaDBLocal")
     DataSource dataSource;
@@ -65,7 +70,7 @@ public class ConsultaDAO {
                     Consulta c = new Consulta();
                     c.setCpf(rs.getString("cpf"));
                     c.setCrm(rs.getString("crm"));
-                    c.setDataDeConsulta(new Date(rs.getDate("dataDeConsulta").getTime()));
+                    c.setDataDeConsulta(new Date(rs.getDate("dataDaConsulta").getTime()));
                     ret.add(c);
                 }
             }
@@ -84,6 +89,26 @@ public class ConsultaDAO {
                     c.setCrm(rs.getString("crm"));
                     c.setDataDeConsulta(new Date(rs.getDate("dataDeConsulta").getTime()));
                     if(c.getCrm().equals(crm)){
+                        ret.add(c);
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+    
+    public List<Consulta> listarTodasConsultasPaciente(String cpf) throws SQLException{
+        System.out.println(cpf);
+        List<Consulta> ret = new ArrayList<>();
+        try(Connection con = dataSource.getConnection();
+                PreparedStatement ps = con.prepareStatement(LISTAR_CONSULTA_PACIENTE_SQL)){
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    Consulta c = new Consulta();
+                    c.setCpf(rs.getString("cpf"));
+                    c.setCrm(rs.getString("crm"));
+                    c.setDataDeConsulta(new Date(rs.getDate("dataDaConsulta").getTime()));
+                    if(c.getCpf().equals(cpf)){
                         ret.add(c);
                     }
                 }
