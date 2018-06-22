@@ -26,11 +26,11 @@ import javax.sql.DataSource;
 public class ConsultaDAO {
     
     private final static String CRIAR_CONSULTA_SQL = "insert into Consulta"
-           + " (cpf, crm, data)"
+           + " (cpf, crm, datadaconsulta)"
            + " values (?,?,?)";
 
     private final static String LISTAR_CONSULTA_SQL = "select"
-           + " c.cpf, c.crm, c.data"
+           + " c.cpf, c.crm, c.datadataconsulta"
            + " from Consulta c";
     
     private final static String LISTAR_CONSULTA_MEDICO_SQL = "select"
@@ -42,7 +42,7 @@ public class ConsultaDAO {
             + " from Consulta c";
     
     
-    @Resource(name = "jdbc/ConsultaDBLocal")
+    @Resource(name = "jdbc/AgendamentoCONSULTA")
     DataSource dataSource;
     
     public Consulta gravarConsulta(Consulta c) throws SQLException {
@@ -52,11 +52,11 @@ public class ConsultaDAO {
            ps.setString(2, c.getCrm());
            ps.setDate(3, new java.sql.Date(c.getDataDeConsulta().getTime()));
            ps.execute();
-           
-           try (ResultSet rs = ps.getGeneratedKeys()) {
-               rs.next();
-               c.setId(rs.getInt(1));
-           }
+       
+        try (ResultSet rs = ps.getGeneratedKeys()) {
+                    rs.next();
+                    c.setId(rs.getInt(1));
+                }
        }
        return c;
    }
@@ -87,7 +87,7 @@ public class ConsultaDAO {
                     Consulta c = new Consulta();
                     c.setCpf(rs.getString("cpf"));
                     c.setCrm(rs.getString("crm"));
-                    c.setDataDeConsulta(new Date(rs.getDate("dataDeConsulta").getTime()));
+                    c.setDataDeConsulta(new Date(rs.getDate("dataDaConsulta").getTime()));
                     if(c.getCrm().equals(crm)){
                         ret.add(c);
                     }

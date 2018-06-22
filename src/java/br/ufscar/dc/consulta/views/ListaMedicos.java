@@ -9,6 +9,7 @@ import br.ufscar.dc.consulta.beans.Medico;
 import br.ufscar.dc.consulta.dao.MedicoDAO;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,23 +36,31 @@ public class ListaMedicos implements Serializable {
     private List<Medico> medicoFiltrados;
     
     private List<String> especialidade;
+    
+    private List<String> crms;
+    
 
 
     @PostConstruct
     public void init() {
         try {
             medico = medicoDAO.listarTodosMedicos();
+            crms = new ArrayList<>();
+            medico.forEach((m) -> {
+                crms.add(m.getCrm());
+            });
+            
         } catch (SQLException ex) {
             Logger.getLogger(ListaMedicos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public List<Medico> getMedico() {
+    public List<Medico> getMedicos() {
         return medico;
     }
 
-    public void setMedico(List<Medico> medico) {
-        this.medico = medico;
+    public void setMedicos(List<Medico> medicos) {
+        this.medico = medicos;
     }
 
     public List<Medico> getMedicoFiltrados() {
@@ -64,6 +73,10 @@ public class ListaMedicos implements Serializable {
 
     public List<String> getEspecialidade() {
         return especialidade;
+    }
+    
+     public List<String> getCrms() {
+        return crms;
     }
 
     

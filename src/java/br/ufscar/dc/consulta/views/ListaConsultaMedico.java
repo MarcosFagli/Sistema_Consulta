@@ -29,6 +29,9 @@ public class ListaConsultaMedico implements Serializable {
 
     @Inject
     ConsultaDAO consultaDAO;
+    
+    @Inject
+    SessaoAtiva sessaoAtiva;
 
     Medico medico;
 
@@ -39,13 +42,9 @@ public class ListaConsultaMedico implements Serializable {
 
     @PostConstruct
     public void init() {
-        medico = new Medico();
         try {
-            System.out.println("PASOOOUUU MED");
-            medico.setCrm("123456");
-            System.out.println("PASOOOUUU MED2");
+            medico = sessaoAtiva.getMedicoAtivo();
             consulta = consultaDAO.listarTodasConsultasMedico(medico.getCrm());
-            System.out.println("PASOOOUUU MED3");
         } catch (SQLException ex) {
             Logger.getLogger(ListaMedicos.class.getName()).log(Level.SEVERE, null, ex);
         }

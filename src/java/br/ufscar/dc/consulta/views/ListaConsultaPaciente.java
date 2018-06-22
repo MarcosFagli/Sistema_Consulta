@@ -10,6 +10,7 @@ import br.ufscar.dc.consulta.beans.Paciente;
 import br.ufscar.dc.consulta.dao.ConsultaDAO;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,12 +40,25 @@ public class ListaConsultaPaciente implements Serializable {
 
     private List<Consulta> consultaFiltradas;
 
+    private List<String> Crmconsulta;
+
+    public List<String> getCrmconsulta() {
+        return Crmconsulta;
+    }
+
+    public void setMedicoconsulta(List<String> medicoconsulta) {
+        this.Crmconsulta = medicoconsulta;
+    }
 
     @PostConstruct
     public void init() {
         try {
             paciente = sessaoAtiva.getPacienteAtivo();
             consulta = consultaDAO.listarTodasConsultasPaciente(paciente.getCpf());
+            Crmconsulta = new ArrayList<>();
+            consulta.forEach((mc) -> {
+               Crmconsulta.add(mc.getCrm());
+            });
         } catch (SQLException ex) {
             Logger.getLogger(ListaMedicos.class.getName()).log(Level.SEVERE, null, ex);
         }

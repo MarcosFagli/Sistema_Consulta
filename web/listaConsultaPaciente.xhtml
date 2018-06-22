@@ -12,9 +12,9 @@
                         <h1>Consultas Agendadas</h1>
                </div>
                <h:form>
-                   <p:dataTable id="dataTableConsultaPaciente" 
-                                var="paciente" 
+                   <p:dataTable id="dataTableConsultaPaciente"  
                                 value="#{listaConsultaPaciente.consulta}" 
+                                var="consulta"
                                 widgetVar="consultaPacienteTable"
                                 emptyMessage="Nenhuma consulta encontrada"
                                 rows="5"
@@ -27,12 +27,14 @@
                                <p:inputText id="globalFilter" onkeyup="PF('consultaPacienteTable').filter()" style="width:300px" placeholder="Digite a palavra-chave"/>
                            </p:outputPanel>
                        </f:facet>
+                       
                        <p:column headerText="Medico"  filterBy="#{consulta.crm}" filterMatchMode="contains">
                            <h:outputText value="#{consulta.crm}" />
                        </p:column>
-		       <p:column headerText="Data" filterBy="#{consulta.data}" filterMatchMode="contains">
-                           <h:outputText value="#{consulta.data}" />
+                       <p:column headerText="Data" filterBy="#{consulta.dataDeConsulta}" filterMatchMode="contains">
+                           <h:outputText value="#{consulta.dataDeConsulta}" />
                        </p:column>
+                       
                    </p:dataTable>
                </h:form>
            </ui:define>     

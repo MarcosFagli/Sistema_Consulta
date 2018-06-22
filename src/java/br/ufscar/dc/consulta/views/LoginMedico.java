@@ -101,7 +101,7 @@ public class LoginMedico implements Serializable {
             String senhatemp = (String) this.getSenha().getValue();
             if (senhatemp.equals(medicoEncontrado.getSenha())) {
                 sessaoAtiva.setMedicoLogado(medicoEncontrado);
-                return "areaMedico";
+                return "listaConsultaMedico";
             } else {
                 mensagem.setMensagem(true, "Senha incorreta! Informe novamente!", MensagemBootstrap.TipoMensagem.TIPO_ERRO);
                 return "loginMedico";

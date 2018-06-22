@@ -29,7 +29,7 @@ public class MedicoDAO {
            + " values (?,?,?,?)";
 
    private final static String LISTAR_MEDICO_SQL = "select"
-           + " m.nome, m.especialidade"
+           + " m.nome, m.especialidade, m.crm"
            + " from Medico m";
 
    private final static String LISTAR_ESPECIALIDADES_SQL = "select"
@@ -42,7 +42,7 @@ public class MedicoDAO {
            + " where crm=?";
    
    
-   @Resource(name = "jdbc/ConsultaDBLocal")
+   @Resource(name = "jdbc/AgendamentoCONSULTA")
    DataSource dataSource;
 
    public Medico gravarMedico(Medico m) throws SQLException {
@@ -71,6 +71,7 @@ public class MedicoDAO {
                 while (rs.next()){
                     Medico m = new Medico();
                     m.setNome(rs.getString("nome"));
+                    m.setCrm(rs.getString("crm"));
                     m.setEspecialidade(rs.getString("especialidade"));
                     ret.add(m);
                 }

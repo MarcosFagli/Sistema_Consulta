@@ -34,7 +34,7 @@ public class PacienteDAO {
            + " from paciente"
            + " where cpf=?";
   
-   @Resource(name = "jdbc/ConsultaDBLocal")
+   @Resource(name = "jdbc/AgendamentoCONSULTA")
    DataSource dataSource;
 
    public Paciente gravarPaciente(Paciente p) throws SQLException {

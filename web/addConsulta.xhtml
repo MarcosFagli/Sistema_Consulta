@@ -17,56 +17,38 @@ and open the template in the editor.
                     <div class="col-lg-12 text-center">
                         <h4>Adicionar Consulta</h4>
                         <form class="form-horizontal" jsf:id="formPalpite">
-                            <div class="alert #{addConsulta.mensagem.tipoMensagem}" jsf:id="mensagem">
-                                #{addConsulta.mensagem.texto}
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="nome">Nome do Medico</label>
-                                <div class="col-sm-10">
+                            <h:selectOneMenu value="#{addConsulta.consulta.crm}">
+                                <f:selectItem itemLabel="Selecionar um crm" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{listaMedicos.crms}" var="c" itemValue="#{c}"/>
+                            </h:selectOneMenu>
+                            
+                            
+                          
+                               <div class="form-group">
+                                <label class="col-sm-2 control-label" for="cpf">Cpf do Paciente</label>
+                                <div class="col-sm-2">
                                     <input type="text"
                                            class="form-control"
-                                           jsf:id="nome"
-                                           jsf:label="Nome"
-                                           jsf:value="#{addConsulta.medico.nome}"
+                                           jsf:id="cpf"
+                                           jsf:label="Cpf"
+                                           jsf:value="#{addConsulta.consulta.cpf}"
                                            jsf:required="true"/>
-										   <f:ajax execute="nome"
-                                                render="@form"
-                                                onevent="monitorarAjax"
-                                                listener="#{addConsulta.encontrarMedico}" />
-                                    <h:message for="nome" class="text text-danger" />
+                                    <h:message for="cpf" class="text text-danger" />
                                 </div>
-                            </div>                
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="dataDaConsulta">Data da Consulta</label>
+                            <label class="col-sm-3 control-label" for="datadaconsulta">Data da Consulta</label>
                                 <div class="col-sm-3">
                                     <input type="date"
                                            class="form-control"
-                                           jsf:id="dataDaConsulta"
-                                           jsf:label="Data da consulta"
-                                           jsf:value="#{addPaciente.paciente.dataDaConsulta}"
+                                           jsf:id="datadaconsulta"
+                                           jsf:label="Datadaconsulta"
+                                           jsf:value="#{addConsulta.consulta.dataDeConsulta}"
                                            jsf:required="true">
-										   <f:ajax execute="dataDaConsulta"
-                                                render="@form"
-                                                onevent="monitorarAjax"
-                                                listener="#{addConsulta.checarDisponibilidade}" />
                                         <f:convertDateTime type="date" pattern="yyyy-MM-dd" />
                                     </input>
-                                    <h:message for="dataDaConsulta" class="text text-danger" />
                                 </div>
                             </div>
-							<div class="form-group">
-								<div class="col-sm-12">
-                                    <button class="btn btn-default"
-                                            jsf:id="ConfirmarConsulta"
-                                        Pedir Consulta
-                                        <f:ajax execute="@form" 
-                                                render="@form"
-                                                onevent="monitorarAjax"
-                                                listener="#{addConsulta.confirmar}"/>
-                                    </button>
-                                </div>
-                            </div>
-                        </form> 
+                            <h:commandButton class="btn btn-default" action="#{addConsulta.cadastrarConsulta()}" value="Adicionar Consulta"/>
+                        </form>
                     </div>
                 </div>
             </ui:define>     
